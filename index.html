@@ -705,10 +705,10 @@ var qrcode = function() {
       for (var i = 0; i < s.length; i += 1) {
         var c = s.charAt(i);
         switch(c) {
-        case '<': escaped += '<'; break;
-        case '>': escaped += '>'; break;
-        case '&': escaped += '&'; break;
-        case '"': escaped += '"'; break;
+        case '<': escaped += '&'+'lt;'; break;
+        case '>': escaped += '&'+'gt;'; break;
+        case '&': escaped += '&'+'amp;'; break;
+        case '"': escaped += '&'+'quot;'; break;
         default : escaped += c; break;
         }
       }
@@ -2433,7 +2433,7 @@ const termsHTML=()=>`<div class="terms"><p class="intro">${esc(LEGAL.split("\n")
 const IVA={BASICA:{label:"IVA 22 % (básica)",p:22},MINIMA:{label:"IVA 10 % (mínima)",p:10},EXENTO:{label:"Exento",p:0}};
 const SERIE="A",EMISOR_RUT="(RUT EMISOR ____________)";
 const $=s=>document.querySelector(s);
-const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&","<":"<",">":">",'"':""","'":"&#39;"}[c]));
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&"+"amp;","<":"&"+"lt;",">":"&"+"gt;",'"':"&"+"quot;","'":"&"+"#39;"}[c]));
 const LS={get(k,d){try{const v=localStorage.getItem("pagnet."+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem("pagnet."+k,JSON.stringify(v))}catch(e){}}};
 const money=c=>(c/100).toFixed(2).replace(".",",");
 const pad7=n=>String(n).padStart(7,"0");
